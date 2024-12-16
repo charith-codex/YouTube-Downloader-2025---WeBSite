@@ -1,54 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YouTube Downloader</title>
-    <link rel="stylesheet" href="static/styles.css" />
+    <title>ZhakeX - YT Downloader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'deep-dark': '#121212',
+              'dark-slate': '#1E1E1E',
+              'accent-blue': '#3B82F6',
+              'accent-green': '#10B981',
+              'text-muted': '#A1A1AA',
+            },
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+    </style>
   </head>
-  <body>
-    <header>
-      <h1>YouTube Downloader</h1>
+  <body class="bg-gray-700 text-gray-100 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-dark-slate/60 backdrop-blur-md py-4 shadow-lg">
+      <div
+        class="max-w-6xl mx-auto px-4 flex items-center justify-between md:justify-center"
+      >
+        <div class="flex items-center space-x-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            class="w-8 h-8 sm:w-10 sm:h-10"
+          >
+            <defs>
+              <linearGradient
+                id="downloadGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#FF0000" stop-opacity="1" />
+                <stop offset="100%" stop-color="#CC0000" stop-opacity="1" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M50 10 L50 70"
+              stroke="url(#downloadGradient)"
+              stroke-width="8"
+              fill="none"
+              stroke-linecap="round"
+            />
+            <path
+              d="M30 50 L50 70 L70 50"
+              stroke="url(#downloadGradient)"
+              stroke-width="8"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <rect
+              x="20"
+              y="80"
+              width="60"
+              height="10"
+              fill="url(#downloadGradient)"
+              rx="5"
+            />
+          </svg>
+          <h1 class="text-lg sm:text-2xl font-bold text-white tracking-tight">
+            ZhakeX - YT Downloader
+          </h1>
+        </div>
+      </div>
     </header>
-    <main>
+
+    <main
+      class="flex flex-col justify-center max-w-4xl mx-auto lg:mx-80 px-4 sm:px-6 lg:px-8 py-8 flex-grow space-y-8"
+    >
       <!-- Upload Cookies Section -->
-      <section>
-        <h2>Upload YouTube Cookies File</h2>
-        <form id="cookiesForm" enctype="multipart/form-data">
-          <label for="cookies">Choose Cookies File:</label>
-          <input type="file" id="cookies" name="cookies" required />
-          <button type="submit">Upload</button>
+      <section
+        class="bg-dark-slate/30 rounded-xl p-4 sm:p-6 backdrop-blur-md border border-gray-800/50"
+      >
+        <h2
+          class="text-lg sm:text-xl font-semibold text-white mb-4 border-b border-gray-700 pb-2"
+        >
+          Upload YouTube Cookies
+        </h2>
+        <form id="cookiesForm" class="space-y-4" enctype="multipart/form-data">
+          <input
+            type="file"
+            id="cookies"
+            name="cookies"
+            required
+            class="block w-full text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-accent-blue file:text-white hover:file:bg-accent-green cursor-pointer bg-dark-slate/50 rounded-lg"
+          />
         </form>
-        <div id="cookiesMessage"></div>
       </section>
 
-      <!-- Video/Audio Download Section -->
-      <section>
-        <h2>Download YouTube Video or Audio</h2>
-        <form id="downloadForm">
-          <label for="url">YouTube Video URL:</label>
+      <!-- Download Section -->
+      <section
+        class="bg-dark-slate/30 rounded-xl p-4 sm:p-6 backdrop-blur-md border border-gray-800/50"
+      >
+        <h2
+          class="text-lg sm:text-xl font-semibold text-white mb-4 border-b border-gray-700 pb-2"
+        >
+          YouTube Video Link
+        </h2>
+        <form id="downloadForm" class="space-y-4">
           <input
             type="url"
             id="url"
             name="url"
-            placeholder="Enter YouTube URL"
+            placeholder="Paste YouTube Video or Playlist URL"
             required
+            class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-slate/50 rounded-lg text-gray-100 placeholder-text-muted focus:ring-2 focus:ring-accent-blue border-none"
           />
 
-          <label for="type">Select Download Type:</label>
-          <select id="type" name="type" required>
-            <option value="video">Video</option>
-            <option value="audio">Audio</option>
-          </select>
+          <div
+            class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+          >
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input
+                type="radio"
+                name="type"
+                value="video"
+                required
+                class="sr-only peer"
+              />
+              <div
+                class="w-full sm:w-24 py-2 px-4 text-center text-gray-300 bg-dark-slate/50 rounded-lg border border-gray-700 peer-checked:bg-accent-blue peer-checked:text-white transition-all duration-300 ease-in-out hover:bg-dark-slate/70 peer-checked:hover:bg-accent-blue/80"
+              >
+                Video
+              </div>
+            </label>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input
+                type="radio"
+                name="type"
+                value="audio"
+                class="sr-only peer"
+              />
+              <div
+                class="w-full sm:w-24 py-2 px-4 text-center text-gray-300 bg-dark-slate/50 rounded-lg border border-gray-700 peer-checked:bg-accent-green peer-checked:text-white transition-all duration-300 ease-in-out hover:bg-dark-slate/70 peer-checked:hover:bg-accent-green/80"
+              >
+                Audio
+              </div>
+            </label>
+          </div>
 
-          <button type="submit">Download</button>
+          <button
+            type="submit"
+            class="w-full bg-accent-blue text-white py-3 rounded-lg hover:bg-accent-green transition duration-300 ease-in-out transform"
+          >
+            Download
+          </button>
         </form>
-        <div class="progress-container">
-          <div id="progressBar" class="progress-bar">0%</div>
-        </div>
       </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-slate/50 backdrop-blur-md py-4">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <p class="text-text-muted text-sm">
+          © 2024 ZhakeX - All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+
     <script src="static/scripts.js"></script>
   </body>
 </html>
