@@ -14,7 +14,7 @@ ZhakeX - YouTube Downloader is a modern, responsive web application designed to 
 ---
 
 ## Demo  
-![image](https://github.com/user-attachments/assets/6f63a080-83ec-4deb-ae4d-09e027ab6956)
+![image](https://github.com/user-attachments/assets/1ded37d1-8315-4d15-8369-7404b30d5cae)
 
 
 ---
