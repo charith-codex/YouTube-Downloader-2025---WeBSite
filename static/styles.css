@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #1aaa97;
+    --secondary-color: #65098dba;
+    --background-color: #f6f2f2;
+    --text-color: #ede8e8;
+    --border-radius: 6px;
+    --box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    --dark-background-color: #121212;
+    --dark-secondary-background: #1f1f1f;
+    --dark-text-color: #e0e0e0;
+    --dark-border-color: #333;
+    --dark-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* General Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.4;
+    background: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+  }
+  
+  /* Header */
+  header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--box-shadow);
+  }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  
+  /* Main Content */
+  main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+  
+  section {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease;
+  }
+  
+  h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Form Styles */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  
+  label {
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 1.1rem;
+  }
+  
+  input[type="url"],
+  input[type="file"],
+  select {
+    padding: 0.5rem;
+    border: 1.5px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  button {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.6rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background: var(--secondary-color);
+  }
+  
+  /* Cookie Message */
+  #cookiesMessage {
+    margin-top: 0.6rem;
+    padding: 0.6rem;
+    border-radius: var(--border-radius);
+    background: #e3f2fd;
+    color: var(--text-color);
+    font-size: 0.9rem;
+  }
+  
+  /* Progress Bar */
+  .progress-container {
+    display: none;
+    background: #eee;
+    border-radius: var(--border-radius);
+    margin-top: 0.6rem;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    width: 0%;
+    height: 20px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    font-size: 1rem;
+    transition: width 0.3s ease;
+  }
+  
+  /* Custom File Input */
+  input[type="file"]::file-selector-button {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border: none;
+    border-radius: var(--border-radius);
+    margin-right: 0.6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="file"]::file-selector-button:hover {
+    background: var(--secondary-color);
+  }
+  
+  /* Animation for Success Message */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  #cookiesMessage {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 500px) {
+    main {
+      padding: 0 0.8rem;
+    }
+  
+    section {
+      padding: 1.2rem;
+    }
+  
+    input[type="url"],
+    input[type="file"],
+    select,
+    button {
+      font-size: 1rem;
+      padding: 0.6rem;
+    }
+  
+    h1 {
+      font-size: 1.4rem;
+    }
+  
+    h2 {
+      font-size: 1rem;
+    }
+  
+    label {
+      font-size: 0.8rem;
+    }
+  }
+  
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: var(--dark-background-color);
+      color: var(--dark-text-color);
+    }
+  
+    header {
+      box-shadow: var(--dark-box-shadow);
+    }
+  
+    section {
+      background: var(--dark-secondary-background);
+      color: var(--dark-text-color);
+      box-shadow: var(--dark-box-shadow);
+    }
+  
+    input[type="url"],
+    input[type="file"],
+    select {
+      background: var(--dark-secondary-background);
+      color: var(--dark-text-color);
+      border: 1.5px solid var(--dark-border-color);
+    }
+  
+    input[type="url"]::placeholder,
+    input[type="file"]::placeholder {
+      color: var(--dark-text-color);
+    }
+  
+    button {
+      background: var(--primary-color);
+    }
+  
+    button:hover {
+      background: var(--secondary-color);
+    }
+  
+    #cookiesMessage {
+      background: var(--dark-secondary-background);
+      color: var(--dark-text-color);
+    }
+  
+    .progress-container {
+      background: var(--dark-border-color);
+    }
+  
+    .progress-bar {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    }
+  }

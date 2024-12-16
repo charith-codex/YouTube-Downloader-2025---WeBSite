@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Downloader</title>
+    <link rel="stylesheet" href="static/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>YouTube Downloader</h1>
+    </header>
+    <main>
+      <!-- Upload Cookies Section -->
+      <section>
+        <h2>Upload YouTube Cookies File</h2>
+        <form id="cookiesForm" enctype="multipart/form-data">
+          <label for="cookies">Choose Cookies File:</label>
+          <input type="file" id="cookies" name="cookies" required />
+          <button type="submit">Upload</button>
+        </form>
+        <div id="cookiesMessage"></div>
+      </section>
+
+      <!-- Video/Audio Download Section -->
+      <section>
+        <h2>Download YouTube Video or Audio</h2>
+        <form id="downloadForm">
+          <label for="url">YouTube Video URL:</label>
+          <input
+            type="url"
+            id="url"
+            name="url"
+            placeholder="Enter YouTube URL"
+            required
+          />
+
+          <label for="type">Select Download Type:</label>
+          <select id="type" name="type" required>
+            <option value="video">Video</option>
+            <option value="audio">Audio</option>
+          </select>
+
+          <button type="submit">Download</button>
+        </form>
+        <div class="progress-container">
+          <div id="progressBar" class="progress-bar">0%</div>
+        </div>
+      </section>
+    </main>
+    <script src="static/scripts.js"></script>
+  </body>
+</html>
